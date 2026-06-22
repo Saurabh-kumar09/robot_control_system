@@ -22,7 +22,7 @@ public:
     /**
      * @brief Constructs an AssemblyRobot with individual components.
      * @param id The unique identifier for the robot.
-     * @param name The name of the robot.
+     * @param name The name of the robot. 
      * @param state The initial operational state of the robot.
      */
     AssemblyRobot(int id, std::string name, RobotState state);

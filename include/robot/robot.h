@@ -102,6 +102,12 @@ public:
      */
     void setState(RobotState state) override;
 
+    /**
+     * @brief Retrieves the full stored RobotInfo structure.
+     * @return A const reference to the internal RobotInfo.
+     */
+    const RobotInfo &getInfo() const;
+
 private:
     /**
      * @brief Internal storage for robot information using composition.

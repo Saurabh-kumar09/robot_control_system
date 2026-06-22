@@ -39,3 +39,7 @@ RobotState Robot::getState() const {
 void Robot::setState(RobotState state) {
     info_.state = state;
 }
+
+const RobotInfo &Robot::getInfo() const {
+    return info_;
+}
