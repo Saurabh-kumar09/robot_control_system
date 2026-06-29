@@ -39,15 +39,13 @@ std::vector<RobotInfo> RobotManager::listRobots() const
 
     robots.reserve(this->robots_.size());
 
-
-    for(const auto& [id, robot] : robots_)
+    for (const auto& entry : robots_)
     {
-        if(robot)
+        if (entry.second)
         {
-            robots.push_back(robot->getInfo());
+            robots.push_back(entry.second->getInfo());
         }
     }
-
 
     return robots;
 }
