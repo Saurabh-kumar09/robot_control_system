@@ -16,6 +16,22 @@ int main() {
         std::cout << "ID: " << robot.id << ", Name: " << robot.name
                   << ", State: " << static_cast<int>(robot.state) << std::endl;
     }
+    // Remove a robot by ID
+    int removeId = 202;
+    bool removed = manager.removeRobot(removeId);
+    std::cout << "\nAttempt to remove robot with ID " << removeId
+              << (removed ? " succeeded." : " failed (not found).") << std::endl;
+
+    std::cout << "\nRobots after removal:" << std::endl;
+    for (const auto &robot : manager.listRobots()) {
+        std::cout << "ID: " << robot.id << ", Name: " << robot.name
+                  << ", State: " << static_cast<int>(robot.state) << std::endl;
+    }
+
+    // Attempt to remove a non-existent robot
+    int missingId = 999;
+    std::cout << "\nAttempt to remove non-existent robot ID " << missingId
+              << ": " << (manager.removeRobot(missingId) ? "removed" : "not found") << std::endl;
 
     return 0;
 }
