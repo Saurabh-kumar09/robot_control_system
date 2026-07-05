@@ -1,51 +1,54 @@
 #include "../../include/manager/robot_manager.h"
 
-
-void RobotManager::registerRobot(std::unique_ptr<Robot> robot)
+auto RobotManager::register_robot(std::unique_ptr<RobotBase> Robot) -> void
 {
-    if(!robot)
-    {
+    if (!Robot) {
         return;
     }
 
-    int id = robot->getId();
+    const auto Id = Robot->get_id();
 
-    robots_[id] = std::move(robot);
+    Robots_[Id] = std::move(Robot);
 }
 
-
-bool RobotManager::removeRobot(int id)
+auto RobotManager::remove_robot(int Id) -> bool
 {
-    return robots_.erase(id) > 0;
+    return Robots_.erase(Id) > 0;
 }
 
-
-Robot* RobotManager::getRobot(int id)
+auto RobotManager::get_robot(int Id) -> RobotBase*
 {
-    auto it = robots_.find(id);
+    auto Iterator = Robots_.find(Id);
 
-    if(it == robots_.end())
-    {
+    if (Iterator == Robots_.end()) {
         return nullptr;
     }
 
-    return it->second.get();
+    return Iterator->second.get();
 }
 
-
-std::vector<RobotInfo> RobotManager::listRobots() const
+auto RobotManager::get_robot(int Id) const -> const RobotBase*
 {
-    std::vector<RobotInfo> robots;
+    auto Iterator = Robots_.find(Id);
 
-    robots.reserve(this->robots_.size());
+    if (Iterator == Robots_.end()) {
+        return nullptr;
+    }
 
-    for (const auto& entry : robots_)
-    {
-        if (entry.second)
-        {
-            robots.push_back(entry.second->getInfo());
+    return Iterator->second.get();
+}
+
+auto RobotManager::list_robots() const -> std::vector<RobotInfo>
+{
+    std::vector<RobotInfo> Robots;
+
+    Robots.reserve(Robots_.size());
+
+    for (const auto& Entry : Robots_) {
+        if (Entry.second) {
+            Robots.push_back(Entry.second->get_info());
         }
     }
 
-    return robots;
+    return Robots;
 }
